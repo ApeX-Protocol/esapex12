@@ -36,7 +36,7 @@ abstract contract TokenSaleable is
     uint256 public constant TOKEN_PRECISION = 1e18;
 
     // 1 day in seconds = 24 * 60 * 60 = 86400
-    uint256 public constant SECONDS_PER_DAY = 86400;
+    uint256 public constant SECONDS_PER_DAY = 86400; 
 
     // event for when a user buys token
     event Buy(
@@ -47,8 +47,10 @@ abstract contract TokenSaleable is
 
     // Initializes the contract
     function __TokenSaleable_init(
+        uint256 _initialSalesToken,
         uint256 _validateTimeInterval
     ) internal initializer {
+        currentSalesLimit = _initialSalesToken;
         currentSalesLimitUpdateTime = int256(block.timestamp / SECONDS_PER_DAY);
         __PriceValidatable_init(_validateTimeInterval);
     }

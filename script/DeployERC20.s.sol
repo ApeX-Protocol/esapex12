@@ -38,13 +38,17 @@ contract DeployERC20 is Script {
         HelperConfig helperConfig = new HelperConfig();
         (, , uint256 deployerKey) = helperConfig.activeNetworkConfig();
 
+        address owner = vm.addr(deployerKey);
+        console.log("owner = ", owner);
+
         vm.startBroadcast(deployerKey);
 
-        // Deploy the logic contract
+        // Deploy APEX contract
         APEXMock apexToken = new APEXMock();
-        USDTMock usdtToken = new USDTMock();
-
         console.log("APEXMock Address: ", address(apexToken));
+
+        // Deploy USDT contract
+        USDTMock usdtToken = new USDTMock();
         console.log("USDTMock Address: ", address(usdtToken));
 
         vm.stopBroadcast();

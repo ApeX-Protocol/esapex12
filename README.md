@@ -12,15 +12,15 @@ $ foundryup
 ### Install Library
 
 ```shell
-forge build
-```
-
-or
-
-```shell
 $ forge install foundry-rs/forge-std --no-commit
 $ forge install OpenZeppelin/openzeppelin-contracts --no-commit
 $ forge install OpenZeppelin/openzeppelin-contracts-upgradeable --no-commit
+```
+
+### Build
+
+```shell
+forge build
 ```
 
 ### Test

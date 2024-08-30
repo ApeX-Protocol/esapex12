@@ -16,10 +16,12 @@ contract ESAPEX12 is InitalStakeable, TokenSaleable, Timelockable {
         address _usdtToken,
         address _apeXToken,
         string memory name,
-        string memory symbol
+        string memory symbol,
+        uint256 _initialSalesToken,
+        uint256 _validateTimeInterval
     ) external initializer {
         __BasicToken_init(_owner, _usdtToken, _apeXToken, name, symbol);
-        __TokenSaleable_init(3 hours); // default price check validateTimeInterval is 3 hours
+        __TokenSaleable_init(_initialSalesToken, _validateTimeInterval); 
     }
 
     /*//////////////////////////////////////////////////////////////

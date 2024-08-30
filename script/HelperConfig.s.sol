@@ -23,6 +23,10 @@ contract HelperConfig is Script {
             activeNetworkConfig = getSepoliaEthConfig();
         } else if (block.chainid == 5003) {
             activeNetworkConfig = getSepoliaMantleConfig();
+        } else if (block.chainid == 421614) {
+            activeNetworkConfig = getArbitrumSepoliaConfig();
+        } else if (block.chainid == 42161) {
+            activeNetworkConfig = getArbitrumMainnetConfig();
         } else {
             activeNetworkConfig = getOrCreateAnvilEthConfig();
         }
@@ -63,6 +67,31 @@ contract HelperConfig is Script {
             deployerKey: vm.envUint("PRIVATE_KEY")
         });
     }
+
+    function getArbitrumSepoliaConfig()
+        public
+        view
+        returns (NetworkConfig memory sepoliaNetworkConfig)
+    {
+        sepoliaNetworkConfig = NetworkConfig({
+            usdtToken: 0xDa25B0b35C78a573e99001eE5b451dFc70858380, 
+            apexToken: 0xcc38728f436BafF88e9ADBc397BF3ebC559dD0a2, 
+            deployerKey: vm.envUint("PRIVATE_KEY")
+        });
+    }
+
+    function getArbitrumMainnetConfig()
+        public
+        view
+        returns (NetworkConfig memory sepoliaNetworkConfig)
+    {
+        sepoliaNetworkConfig = NetworkConfig({
+            usdtToken: 0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9,   
+            apexToken: 0x61A1ff55C5216b636a294A07D77C6F4Df10d3B56,
+            deployerKey: vm.envUint("PRIVATE_KEY") 
+        });
+    }
+
 
     function getOrCreateAnvilEthConfig()
         public

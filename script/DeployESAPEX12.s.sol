@@ -14,11 +14,32 @@ contract DeployESAPEX12 is Script {
     function run() public returns (TransparentUpgradeableProxy, address, address, address) {
         HelperConfig helperConfig = new HelperConfig();
         (address usdtToken, address apexToken, uint256 deployerKey) = helperConfig.activeNetworkConfig();
-
-        vm.startBroadcast(deployerKey);
+        console.log("usdtToken: ", usdtToken);
+        console.log("apexToken: ", apexToken);
 
         address owner = vm.addr(deployerKey);
-        console.log("owner = ", owner);
+        console.log("owner: ", owner);
+
+        // TransparentUpgradeableProxy proxy;
+        // return (proxy, usdtToken, apexToken, owner);
+
+        vm.startBroadcast(deployerKey);
+   
+
+        //  ++++++++++++++ testnet config ++++++++++++++++++
+        // // initial sales token
+        // uint256 initialSalesToken = 14083333.33 * 1e18;
+
+        // // default price check validateTimeInterval is 3 hours
+        // uint256 validateTimeInterval = 3 hours;
+
+
+        //  ++++++++++++++ mainnet config ++++++++++++++++++
+        // initial sales token
+        uint256 initialSalesToken = 14121914.8 * 1e18;
+
+        // default price check validateTimeInterval is 24 hours
+        uint256 validateTimeInterval = 24 hours;
 
         // Deploy the logic contract
         ESAPEX12 esAPEX12Logic = new ESAPEX12();
@@ -28,7 +49,7 @@ contract DeployESAPEX12 is Script {
 
         // Encode the initializer function call
         bytes memory initData = abi.encodeWithSelector(
-            ESAPEX12.initialize.selector, owner, address(usdtToken), address(apexToken), "esAPEX12", "esAPEX12"
+            ESAPEX12.initialize.selector, owner, address(usdtToken), address(apexToken), "esAPEX12", "esAPEX12", initialSalesToken,validateTimeInterval
         );
 
         // Deploy the Transparent Upgradeable Proxy
